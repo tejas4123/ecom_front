@@ -11,10 +11,12 @@ export function CartContextProvider({children}) {
     }
   }, [cartProducts]);
   useEffect(() => {
-    if (ls && ls.getItem('cart')) {
-      setCartProducts(JSON.parse(ls.getItem('cart')));
+    const storedCart = ls?.getItem('cart');
+    if (storedCart) {
+      setCartProducts(JSON.parse(storedCart));
     }
-  }, []);
+  }, [ls]);
+  
   function addProduct(productId) {
     setCartProducts(prev => [...prev,productId]);
   }
